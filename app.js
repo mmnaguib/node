@@ -1,0 +1,12 @@
+const express = require('express');
+const connectToDB = require('./config/db');
+require('dotenv').config();
+connectToDB();
+const app = express();
+app.use(express.json());
+app.use('/api/books', require('./routes/books'));
+app.use('/api/authors', require('./routes/authors'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, ()=>{console.log(`Server is running on port ${PORT}`); });
